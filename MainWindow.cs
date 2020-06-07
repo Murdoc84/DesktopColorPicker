@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace DesktopColorPicker
 {
@@ -14,6 +15,9 @@ namespace DesktopColorPicker
         private Bitmap bitmapMagnifierGlass;
         private Graphics graphicsMagnifierGlass;
         private int sizeMagnifierGlass = 11;
+        private Color pickedColor;
+        private int pickedX;
+        private int pickedY;
 
         private Config config = new Config();
         private GetColorFromXY getColor = new GetColorFromXY();
@@ -28,6 +32,8 @@ namespace DesktopColorPicker
         {
             this.Location = new Point(Int32.Parse(config.Get("StartPositionX")), Int32.Parse(config.Get("StartPositionY")));
             pictureBoxTopLeftCorner.Parent = panelBackground;
+            this.TransparencyKey = Color.Turquoise;
+            this.BackColor = Color.Turquoise;
             pictureBoxZoomCross.Parent = pictureBoxMagnifierGlass;
             timerPositionXY.Start();
             timerPositionXY.Interval = 1;
@@ -109,6 +115,75 @@ namespace DesktopColorPicker
             {
                 this.TopMost = false;
             }
+        }
+
+        private void textBoxSetX_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != '-'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxSetY_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void buttonPickColorFromXY_Click(object sender, EventArgs e)
+        {
+            pickedX = Int32.Parse(textBoxSetX.Text);
+            pickedY = Int32.Parse(textBoxSetY.Text);
+            pickedColor = getColor.GetColorAt(pickedX, pickedY);
+            SetPickedValues();
+        }
+
+        private void panelShowHide_MouseClick(object sender, MouseEventArgs e)
+        {
+            ShowSavedPanel();
+        }
+
+        private void labelShowHide_MouseClick(object sender, MouseEventArgs e)
+        {
+            ShowSavedPanel();
+        }
+        private void ShowSavedPanel()
+        {
+            if (labelShowHide.Text.Equals("SHOW"))
+            {
+                labelShowHide.Text = "HIDE";
+                panelSaved.Visible = true;
+            }
+            else
+            {
+                labelShowHide.Text = "SHOW";
+                panelSaved.Visible = false;
+            }
+        }
+        private void SetPickedValues()
+        {
+            textBoxPickedX.Text = pickedX.ToString();
+            textBoxPickedY.Text = pickedY.ToString();
+            textBoxPickedA.Text = pickedColor.A.ToString();
+            textBoxPickedR.Text = pickedColor.R.ToString();
+            textBoxPickedG.Text = pickedColor.G.ToString();
+            textBoxPickedB.Text = pickedColor.B.ToString();
+            pictureBoxPicketColor.BackColor = pickedColor;
+        }
+
+        private void pictureBoxPicketColor_MouseClick(object sender, MouseEventArgs e)
+        {
+            string textColor = $"Color.FromArgb({pickedColor.A.ToString()}, {pickedColor.R.ToString()}, {pickedColor.G.ToString()}, {pickedColor.B.ToString()})";
+            Clipboard.SetText(textColor);
+            MessageBox.Show($"Clipboard: {textColor}");
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            string saveAs = Interaction.InputBox("Save picked color as ...", "Save As ...", "");
         }
     }
 }

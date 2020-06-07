@@ -36,6 +36,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -51,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="common\Config.cs" />
+    <Compile Include="common\File.cs" />
     <Compile Include="common\GetColorFromXY.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -91,6 +93,5 @@
     <Content Include="resources\arrow.png" />
     <None Include="resources\icon.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

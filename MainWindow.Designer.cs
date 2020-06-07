@@ -35,6 +35,11 @@
             this.checkBoxAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.pictureBoxTopLeftCorner = new System.Windows.Forms.PictureBox();
             this.panelBackground = new System.Windows.Forms.Panel();
+            this.buttonPickColorFromXY = new System.Windows.Forms.Button();
+            this.labelSetY = new System.Windows.Forms.Label();
+            this.labelSetX = new System.Windows.Forms.Label();
+            this.textBoxSetY = new System.Windows.Forms.TextBox();
+            this.textBoxSetX = new System.Windows.Forms.TextBox();
             this.labelActualRGB = new System.Windows.Forms.Label();
             this.labelActualB = new System.Windows.Forms.Label();
             this.labelActualG = new System.Windows.Forms.Label();
@@ -53,11 +58,33 @@
             this.pictureBoxMagnifierGlass = new System.Windows.Forms.PictureBox();
             this.labelActualX = new System.Windows.Forms.Label();
             this.timerPositionXY = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelBG = new System.Windows.Forms.Label();
+            this.labelGG = new System.Windows.Forms.Label();
+            this.labelRG = new System.Windows.Forms.Label();
+            this.labelAG = new System.Windows.Forms.Label();
+            this.labelYG = new System.Windows.Forms.Label();
+            this.labelXG = new System.Windows.Forms.Label();
+            this.panelShowHide = new System.Windows.Forms.Panel();
+            this.labelShowHide = new System.Windows.Forms.Label();
+            this.panelSaved = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBoxPickedX = new System.Windows.Forms.TextBox();
+            this.textBoxPickedY = new System.Windows.Forms.TextBox();
+            this.textBoxPickedA = new System.Windows.Forms.TextBox();
+            this.textBoxPickedB = new System.Windows.Forms.TextBox();
+            this.textBoxPickedG = new System.Windows.Forms.TextBox();
+            this.textBoxPickedR = new System.Windows.Forms.TextBox();
+            this.pictureBoxPicketColor = new System.Windows.Forms.PictureBox();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.panelTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).BeginInit();
             this.panelBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMagnifierGlass)).BeginInit();
+            this.panelShowHide.SuspendLayout();
+            this.panelSaved.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicketColor)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonClose
@@ -125,6 +152,26 @@
             // panelBackground
             // 
             this.panelBackground.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelBackground.Controls.Add(this.buttonSave);
+            this.panelBackground.Controls.Add(this.pictureBoxPicketColor);
+            this.panelBackground.Controls.Add(this.textBoxPickedB);
+            this.panelBackground.Controls.Add(this.textBoxPickedG);
+            this.panelBackground.Controls.Add(this.textBoxPickedR);
+            this.panelBackground.Controls.Add(this.textBoxPickedA);
+            this.panelBackground.Controls.Add(this.textBoxPickedY);
+            this.panelBackground.Controls.Add(this.textBoxPickedX);
+            this.panelBackground.Controls.Add(this.labelBG);
+            this.panelBackground.Controls.Add(this.labelGG);
+            this.panelBackground.Controls.Add(this.labelRG);
+            this.panelBackground.Controls.Add(this.labelAG);
+            this.panelBackground.Controls.Add(this.labelYG);
+            this.panelBackground.Controls.Add(this.labelXG);
+            this.panelBackground.Controls.Add(this.label1);
+            this.panelBackground.Controls.Add(this.buttonPickColorFromXY);
+            this.panelBackground.Controls.Add(this.labelSetY);
+            this.panelBackground.Controls.Add(this.labelSetX);
+            this.panelBackground.Controls.Add(this.textBoxSetY);
+            this.panelBackground.Controls.Add(this.textBoxSetX);
             this.panelBackground.Controls.Add(this.labelActualRGB);
             this.panelBackground.Controls.Add(this.labelActualB);
             this.panelBackground.Controls.Add(this.labelActualG);
@@ -145,17 +192,67 @@
             this.panelBackground.Controls.Add(this.pictureBoxTopLeftCorner);
             this.panelBackground.Location = new System.Drawing.Point(0, 0);
             this.panelBackground.Name = "panelBackground";
-            this.panelBackground.Size = new System.Drawing.Size(400, 170);
+            this.panelBackground.Size = new System.Drawing.Size(400, 195);
             this.panelBackground.TabIndex = 3;
+            // 
+            // buttonPickColorFromXY
+            // 
+            this.buttonPickColorFromXY.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonPickColorFromXY.Location = new System.Drawing.Point(197, 47);
+            this.buttonPickColorFromXY.Name = "buttonPickColorFromXY";
+            this.buttonPickColorFromXY.Size = new System.Drawing.Size(191, 23);
+            this.buttonPickColorFromXY.TabIndex = 26;
+            this.buttonPickColorFromXY.Text = "Pick color from X Y";
+            this.buttonPickColorFromXY.UseVisualStyleBackColor = true;
+            this.buttonPickColorFromXY.Click += new System.EventHandler(this.buttonPickColorFromXY_Click);
+            // 
+            // labelSetY
+            // 
+            this.labelSetY.AutoSize = true;
+            this.labelSetY.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSetY.Location = new System.Drawing.Point(292, 27);
+            this.labelSetY.Name = "labelSetY";
+            this.labelSetY.Size = new System.Drawing.Size(16, 15);
+            this.labelSetY.TabIndex = 25;
+            this.labelSetY.Text = "Y:";
+            // 
+            // labelSetX
+            // 
+            this.labelSetX.AutoSize = true;
+            this.labelSetX.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSetX.Location = new System.Drawing.Point(194, 27);
+            this.labelSetX.Name = "labelSetX";
+            this.labelSetX.Size = new System.Drawing.Size(18, 15);
+            this.labelSetX.TabIndex = 24;
+            this.labelSetX.Text = "X:";
+            // 
+            // textBoxSetY
+            // 
+            this.textBoxSetY.Location = new System.Drawing.Point(310, 25);
+            this.textBoxSetY.Name = "textBoxSetY";
+            this.textBoxSetY.Size = new System.Drawing.Size(75, 20);
+            this.textBoxSetY.TabIndex = 23;
+            this.textBoxSetY.Text = "0";
+            this.textBoxSetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSetY_KeyPress);
+            // 
+            // textBoxSetX
+            // 
+            this.textBoxSetX.Location = new System.Drawing.Point(213, 25);
+            this.textBoxSetX.Name = "textBoxSetX";
+            this.textBoxSetX.Size = new System.Drawing.Size(75, 20);
+            this.textBoxSetX.TabIndex = 22;
+            this.textBoxSetX.Text = "0";
+            this.textBoxSetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSetX_KeyPress);
             // 
             // labelActualRGB
             // 
+            this.labelActualRGB.AutoSize = true;
             this.labelActualRGB.BackColor = System.Drawing.Color.Transparent;
-            this.labelActualRGB.Font = new System.Drawing.Font("Arial", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelActualRGB.Location = new System.Drawing.Point(166, 87);
+            this.labelActualRGB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelActualRGB.Location = new System.Drawing.Point(112, 166);
             this.labelActualRGB.Margin = new System.Windows.Forms.Padding(0);
             this.labelActualRGB.Name = "labelActualRGB";
-            this.labelActualRGB.Size = new System.Drawing.Size(10, 74);
+            this.labelActualRGB.Size = new System.Drawing.Size(50, 15);
             this.labelActualRGB.TabIndex = 21;
             this.labelActualRGB.Text = "#FFFFFF";
             this.labelActualRGB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -300,7 +397,7 @@
             this.panelActualColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelActualColor.Location = new System.Drawing.Point(3, 148);
             this.panelActualColor.Name = "panelActualColor";
-            this.panelActualColor.Size = new System.Drawing.Size(100, 20);
+            this.panelActualColor.Size = new System.Drawing.Size(100, 41);
             this.panelActualColor.TabIndex = 8;
             // 
             // pictureBoxZoomCross
@@ -341,12 +438,228 @@
             // 
             this.timerPositionXY.Tick += new System.EventHandler(this.timerPositionXY_Tick);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(218, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(150, 30);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Ctrl+G for pick cursor location\r\nShift+Ctrl+G for pick and save";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelBG
+            // 
+            this.labelBG.AutoSize = true;
+            this.labelBG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelBG.Location = new System.Drawing.Point(263, 147);
+            this.labelBG.Name = "labelBG";
+            this.labelBG.Size = new System.Drawing.Size(21, 15);
+            this.labelBG.TabIndex = 33;
+            this.labelBG.Text = "B: ";
+            // 
+            // labelGG
+            // 
+            this.labelGG.AutoSize = true;
+            this.labelGG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelGG.Location = new System.Drawing.Point(263, 127);
+            this.labelGG.Name = "labelGG";
+            this.labelGG.Size = new System.Drawing.Size(21, 15);
+            this.labelGG.TabIndex = 32;
+            this.labelGG.Text = "G: ";
+            // 
+            // labelRG
+            // 
+            this.labelRG.AutoSize = true;
+            this.labelRG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelRG.Location = new System.Drawing.Point(263, 107);
+            this.labelRG.Name = "labelRG";
+            this.labelRG.Size = new System.Drawing.Size(21, 15);
+            this.labelRG.TabIndex = 31;
+            this.labelRG.Text = "R: ";
+            // 
+            // labelAG
+            // 
+            this.labelAG.AutoSize = true;
+            this.labelAG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelAG.Location = new System.Drawing.Point(191, 147);
+            this.labelAG.Name = "labelAG";
+            this.labelAG.Size = new System.Drawing.Size(21, 15);
+            this.labelAG.TabIndex = 30;
+            this.labelAG.Text = "A: ";
+            // 
+            // labelYG
+            // 
+            this.labelYG.AutoSize = true;
+            this.labelYG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelYG.Location = new System.Drawing.Point(191, 127);
+            this.labelYG.Name = "labelYG";
+            this.labelYG.Size = new System.Drawing.Size(19, 15);
+            this.labelYG.TabIndex = 29;
+            this.labelYG.Text = "Y: ";
+            // 
+            // labelXG
+            // 
+            this.labelXG.AutoSize = true;
+            this.labelXG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelXG.Location = new System.Drawing.Point(191, 107);
+            this.labelXG.Name = "labelXG";
+            this.labelXG.Size = new System.Drawing.Size(21, 15);
+            this.labelXG.TabIndex = 28;
+            this.labelXG.Text = "X: ";
+            // 
+            // panelShowHide
+            // 
+            this.panelShowHide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(90)))), ((int)(((byte)(115)))));
+            this.panelShowHide.Controls.Add(this.labelShowHide);
+            this.panelShowHide.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
+            this.panelShowHide.Location = new System.Drawing.Point(0, 195);
+            this.panelShowHide.Name = "panelShowHide";
+            this.panelShowHide.Size = new System.Drawing.Size(400, 15);
+            this.panelShowHide.TabIndex = 4;
+            this.panelShowHide.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelShowHide_MouseClick);
+            // 
+            // labelShowHide
+            // 
+            this.labelShowHide.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelShowHide.Location = new System.Drawing.Point(186, 3);
+            this.labelShowHide.Name = "labelShowHide";
+            this.labelShowHide.Size = new System.Drawing.Size(36, 10);
+            this.labelShowHide.TabIndex = 0;
+            this.labelShowHide.Text = "SHOW";
+            this.labelShowHide.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelShowHide.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelShowHide_MouseClick);
+            // 
+            // panelSaved
+            // 
+            this.panelSaved.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelSaved.Controls.Add(this.listBox1);
+            this.panelSaved.Location = new System.Drawing.Point(0, 210);
+            this.panelSaved.Name = "panelSaved";
+            this.panelSaved.Size = new System.Drawing.Size(400, 364);
+            this.panelSaved.TabIndex = 5;
+            this.panelSaved.Visible = false;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "3c",
+            "2",
+            "3",
+            "1",
+            "23",
+            "12",
+            "4",
+            "",
+            "44",
+            "123",
+            "4",
+            "123",
+            "4",
+            "123",
+            "41",
+            "234",
+            "12",
+            "34",
+            "123",
+            "4",
+            "1234",
+            "123",
+            "412",
+            "34",
+            "12",
+            "34",
+            "12",
+            "34",
+            "12",
+            "34",
+            "21",
+            "34",
+            "",
+            "234"});
+            this.listBox1.Location = new System.Drawing.Point(9, 41);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(379, 316);
+            this.listBox1.TabIndex = 0;
+            // 
+            // textBoxPickedX
+            // 
+            this.textBoxPickedX.Location = new System.Drawing.Point(211, 104);
+            this.textBoxPickedX.Name = "textBoxPickedX";
+            this.textBoxPickedX.ReadOnly = true;
+            this.textBoxPickedX.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedX.TabIndex = 34;
+            // 
+            // textBoxPickedY
+            // 
+            this.textBoxPickedY.Location = new System.Drawing.Point(211, 124);
+            this.textBoxPickedY.Name = "textBoxPickedY";
+            this.textBoxPickedY.ReadOnly = true;
+            this.textBoxPickedY.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedY.TabIndex = 35;
+            // 
+            // textBoxPickedA
+            // 
+            this.textBoxPickedA.Location = new System.Drawing.Point(211, 144);
+            this.textBoxPickedA.Name = "textBoxPickedA";
+            this.textBoxPickedA.ReadOnly = true;
+            this.textBoxPickedA.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedA.TabIndex = 36;
+            // 
+            // textBoxPickedB
+            // 
+            this.textBoxPickedB.Location = new System.Drawing.Point(285, 144);
+            this.textBoxPickedB.Name = "textBoxPickedB";
+            this.textBoxPickedB.ReadOnly = true;
+            this.textBoxPickedB.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedB.TabIndex = 39;
+            // 
+            // textBoxPickedG
+            // 
+            this.textBoxPickedG.Location = new System.Drawing.Point(285, 124);
+            this.textBoxPickedG.Name = "textBoxPickedG";
+            this.textBoxPickedG.ReadOnly = true;
+            this.textBoxPickedG.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedG.TabIndex = 38;
+            // 
+            // textBoxPickedR
+            // 
+            this.textBoxPickedR.Location = new System.Drawing.Point(285, 104);
+            this.textBoxPickedR.Name = "textBoxPickedR";
+            this.textBoxPickedR.ReadOnly = true;
+            this.textBoxPickedR.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedR.TabIndex = 37;
+            // 
+            // pictureBoxPicketColor
+            // 
+            this.pictureBoxPicketColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxPicketColor.Location = new System.Drawing.Point(335, 106);
+            this.pictureBoxPicketColor.Name = "pictureBoxPicketColor";
+            this.pictureBoxPicketColor.Size = new System.Drawing.Size(56, 55);
+            this.pictureBoxPicketColor.TabIndex = 40;
+            this.pictureBoxPicketColor.TabStop = false;
+            this.pictureBoxPicketColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPicketColor_MouseClick);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSave.Location = new System.Drawing.Point(197, 166);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(191, 23);
+            this.buttonSave.TabIndex = 41;
+            this.buttonSave.Text = "Save data as ...";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(400, 170);
+            this.ClientSize = new System.Drawing.Size(400, 574);
+            this.Controls.Add(this.panelSaved);
+            this.Controls.Add(this.panelShowHide);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.panelTopBar);
             this.Controls.Add(this.panelBackground);
@@ -363,6 +676,9 @@
             this.panelBackground.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMagnifierGlass)).EndInit();
+            this.panelShowHide.ResumeLayout(false);
+            this.panelSaved.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicketColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -392,6 +708,30 @@
         private System.Windows.Forms.Label labelActualY;
         private System.Windows.Forms.Label labelActualRGB;
         private System.Windows.Forms.CheckBox checkBoxAlwaysOnTop;
+        private System.Windows.Forms.Button buttonPickColorFromXY;
+        private System.Windows.Forms.Label labelSetY;
+        private System.Windows.Forms.Label labelSetX;
+        private System.Windows.Forms.TextBox textBoxSetY;
+        private System.Windows.Forms.TextBox textBoxSetX;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelBG;
+        private System.Windows.Forms.Label labelGG;
+        private System.Windows.Forms.Label labelRG;
+        private System.Windows.Forms.Label labelAG;
+        private System.Windows.Forms.Label labelYG;
+        private System.Windows.Forms.Label labelXG;
+        private System.Windows.Forms.Panel panelShowHide;
+        private System.Windows.Forms.Label labelShowHide;
+        private System.Windows.Forms.Panel panelSaved;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox textBoxPickedB;
+        private System.Windows.Forms.TextBox textBoxPickedG;
+        private System.Windows.Forms.TextBox textBoxPickedR;
+        private System.Windows.Forms.TextBox textBoxPickedA;
+        private System.Windows.Forms.TextBox textBoxPickedY;
+        private System.Windows.Forms.TextBox textBoxPickedX;
+        private System.Windows.Forms.PictureBox pictureBoxPicketColor;
+        private System.Windows.Forms.Button buttonSave;
     }
 }
 
