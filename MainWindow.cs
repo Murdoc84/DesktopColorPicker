@@ -2,9 +2,8 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Collections.Specialized;
 
 namespace DesktopColorPicker
 {
@@ -64,8 +63,10 @@ namespace DesktopColorPicker
 
         private void timerPositionXY_Tick(object sender, EventArgs e)
         {
+            // Actual cursor position
             labelActualX.Text = Cursor.Position.X.ToString();
             labelActualY.Text = Cursor.Position.Y.ToString();
+            // Magnifier
             bitmapMagnifierGlass = new Bitmap(sizeMagnifierGlass, sizeMagnifierGlass);
             graphicsMagnifierGlass = Graphics.FromImage(bitmapMagnifierGlass);
             graphicsMagnifierGlass.CopyFromScreen(MousePosition.X - (sizeMagnifierGlass / 2), MousePosition.Y - (sizeMagnifierGlass / 2), 0, 0, new Size(sizeMagnifierGlass, sizeMagnifierGlass));
@@ -78,7 +79,14 @@ namespace DesktopColorPicker
                 g.DrawImage(bitmapMagnifierGlass, new Rectangle(Point.Empty, zoomed.Size));
             }
             pictureBoxMagnifierGlass.Image = zoomed;
-            panelActualColor.BackColor = getColor.GetColorAt(MousePosition.X, MousePosition.Y);
+            // Actual color under cursor
+            Color actualColor = getColor.GetColorAt(MousePosition.X, MousePosition.Y);
+            panelActualColor.BackColor = actualColor;
+            labelActualA.Text = actualColor.A.ToString();
+            labelActualR.Text = actualColor.R.ToString();
+            labelActualG.Text = actualColor.G.ToString();
+            labelActualB.Text = actualColor.B.ToString();
+            labelActualRGB.Text = "#" + actualColor.R.ToString("X2") + actualColor.G.ToString("X2") + actualColor.B.ToString("X2");
 
         }
 
@@ -87,7 +95,6 @@ namespace DesktopColorPicker
             Graphics cross = pictureBoxMagnifierGlass.CreateGraphics();
             Brush red = new SolidBrush(Color.Red);
             Pen redPen = new Pen(red, 1);
-
             cross.DrawLine(redPen, pictureBoxMagnifierGlass.Width / 2, 0, pictureBoxMagnifierGlass.Height / 2, (pictureBoxMagnifierGlass.Height - sizeMagnifierGlass + 1) / 2);
             cross.DrawLine(redPen, pictureBoxMagnifierGlass.Width / 2, (pictureBoxMagnifierGlass.Height + sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2, pictureBoxMagnifierGlass.Height);
             cross.DrawLine(redPen, 0, pictureBoxMagnifierGlass.Height/2, (pictureBoxMagnifierGlass.Width - sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2);
