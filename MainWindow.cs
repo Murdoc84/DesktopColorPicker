@@ -2,7 +2,6 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace DesktopColorPicker
@@ -16,8 +15,8 @@ namespace DesktopColorPicker
         private Graphics graphicsMagnifierGlass;
         private int sizeMagnifierGlass = 11;
 
-        Config config = new Config();
-        GetColorFromXY getColor = new GetColorFromXY();
+        private Config config = new Config();
+        private GetColorFromXY getColor = new GetColorFromXY();
 
         public MainWindow()
         {
@@ -87,7 +86,6 @@ namespace DesktopColorPicker
             labelActualG.Text = actualColor.G.ToString();
             labelActualB.Text = actualColor.B.ToString();
             labelActualRGB.Text = "#" + actualColor.R.ToString("X2") + actualColor.G.ToString("X2") + actualColor.B.ToString("X2");
-
         }
 
         private void pictureBoxZoomCross_Paint(object sender, PaintEventArgs e)
@@ -97,8 +95,20 @@ namespace DesktopColorPicker
             Pen redPen = new Pen(red, 1);
             cross.DrawLine(redPen, pictureBoxMagnifierGlass.Width / 2, 0, pictureBoxMagnifierGlass.Height / 2, (pictureBoxMagnifierGlass.Height - sizeMagnifierGlass + 1) / 2);
             cross.DrawLine(redPen, pictureBoxMagnifierGlass.Width / 2, (pictureBoxMagnifierGlass.Height + sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2, pictureBoxMagnifierGlass.Height);
-            cross.DrawLine(redPen, 0, pictureBoxMagnifierGlass.Height/2, (pictureBoxMagnifierGlass.Width - sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2);
+            cross.DrawLine(redPen, 0, pictureBoxMagnifierGlass.Height / 2, (pictureBoxMagnifierGlass.Width - sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2);
             cross.DrawLine(redPen, (pictureBoxMagnifierGlass.Width + sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2, pictureBoxMagnifierGlass.Width, pictureBoxMagnifierGlass.Height / 2);
+        }
+
+        private void checkBoxAlwaysOnTop_Click(object sender, EventArgs e)
+        {
+            if (checkBoxAlwaysOnTop.Checked)
+            {
+                this.TopMost = true;
+            }
+            else
+            {
+                this.TopMost = false;
+            }
         }
     }
 }

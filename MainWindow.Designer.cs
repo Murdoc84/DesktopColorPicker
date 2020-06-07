@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelTopBar = new System.Windows.Forms.Panel();
+            this.checkBoxAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.pictureBoxTopLeftCorner = new System.Windows.Forms.PictureBox();
             this.panelBackground = new System.Windows.Forms.Panel();
             this.labelActualRGB = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.pictureBoxMagnifierGlass = new System.Windows.Forms.PictureBox();
             this.labelActualX = new System.Windows.Forms.Label();
             this.timerPositionXY = new System.Windows.Forms.Timer(this.components);
+            this.panelTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).BeginInit();
             this.panelBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).BeginInit();
@@ -80,6 +82,7 @@
             // panelTopBar
             // 
             this.panelTopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(90)))), ((int)(((byte)(115)))));
+            this.panelTopBar.Controls.Add(this.checkBoxAlwaysOnTop);
             this.panelTopBar.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.panelTopBar.Location = new System.Drawing.Point(37, 0);
             this.panelTopBar.Name = "panelTopBar";
@@ -88,6 +91,21 @@
             this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
             this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
             this.panelTopBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // checkBoxAlwaysOnTop
+            // 
+            this.checkBoxAlwaysOnTop.AutoSize = true;
+            this.checkBoxAlwaysOnTop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxAlwaysOnTop.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBoxAlwaysOnTop.ForeColor = System.Drawing.SystemColors.Control;
+            this.checkBoxAlwaysOnTop.Location = new System.Drawing.Point(227, 2);
+            this.checkBoxAlwaysOnTop.Name = "checkBoxAlwaysOnTop";
+            this.checkBoxAlwaysOnTop.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxAlwaysOnTop.Size = new System.Drawing.Size(105, 19);
+            this.checkBoxAlwaysOnTop.TabIndex = 0;
+            this.checkBoxAlwaysOnTop.Text = "Always on top";
+            this.checkBoxAlwaysOnTop.UseVisualStyleBackColor = true;
+            this.checkBoxAlwaysOnTop.Click += new System.EventHandler(this.checkBoxAlwaysOnTop_Click);
             // 
             // pictureBoxTopLeftCorner
             // 
@@ -338,6 +356,8 @@
             this.Name = "MainWindow";
             this.Text = "Desktop Color Picker";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.panelTopBar.ResumeLayout(false);
+            this.panelTopBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).EndInit();
             this.panelBackground.ResumeLayout(false);
             this.panelBackground.PerformLayout();
@@ -371,6 +391,7 @@
         private System.Windows.Forms.Label labelActualA;
         private System.Windows.Forms.Label labelActualY;
         private System.Windows.Forms.Label labelActualRGB;
+        private System.Windows.Forms.CheckBox checkBoxAlwaysOnTop;
     }
 }
 
