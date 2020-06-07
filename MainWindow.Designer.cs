@@ -34,15 +34,18 @@
             this.panelTopBar = new System.Windows.Forms.Panel();
             this.pictureBoxTopLeftCorner = new System.Windows.Forms.PictureBox();
             this.panelBackground = new System.Windows.Forms.Panel();
+            this.pictureBoxZoomCross = new System.Windows.Forms.PictureBox();
+            this.pictureBoxMagnifierGlass = new System.Windows.Forms.PictureBox();
             this.labelActualY = new System.Windows.Forms.Label();
             this.labelActualX = new System.Windows.Forms.Label();
             this.pictureBoxArrow = new System.Windows.Forms.PictureBox();
             this.timerPositionXY = new System.Windows.Forms.Timer(this.components);
-            this.pictureBoxMagnifierGlass = new System.Windows.Forms.PictureBox();
+            this.panelActualColor = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).BeginInit();
             this.panelBackground.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMagnifierGlass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrow)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonClose
@@ -80,6 +83,7 @@
             // 
             this.pictureBoxTopLeftCorner.BackColor = System.Drawing.Color.Transparent;
             this.pictureBoxTopLeftCorner.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxTopLeftCorner.Enabled = false;
             this.pictureBoxTopLeftCorner.ErrorImage = null;
             this.pictureBoxTopLeftCorner.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxTopLeftCorner.Image")));
             this.pictureBoxTopLeftCorner.InitialImage = null;
@@ -93,6 +97,8 @@
             // panelBackground
             // 
             this.panelBackground.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelBackground.Controls.Add(this.panelActualColor);
+            this.panelBackground.Controls.Add(this.pictureBoxZoomCross);
             this.panelBackground.Controls.Add(this.pictureBoxMagnifierGlass);
             this.panelBackground.Controls.Add(this.labelActualY);
             this.panelBackground.Controls.Add(this.labelActualX);
@@ -102,6 +108,27 @@
             this.panelBackground.Name = "panelBackground";
             this.panelBackground.Size = new System.Drawing.Size(400, 200);
             this.panelBackground.TabIndex = 3;
+            // 
+            // pictureBoxZoomCross
+            // 
+            this.pictureBoxZoomCross.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxZoomCross.Location = new System.Drawing.Point(37, 75);
+            this.pictureBoxZoomCross.Name = "pictureBoxZoomCross";
+            this.pictureBoxZoomCross.Size = new System.Drawing.Size(1, 1);
+            this.pictureBoxZoomCross.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxZoomCross.TabIndex = 7;
+            this.pictureBoxZoomCross.TabStop = false;
+            this.pictureBoxZoomCross.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxZoomCross_Paint);
+            // 
+            // pictureBoxMagnifierGlass
+            // 
+            this.pictureBoxMagnifierGlass.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxMagnifierGlass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxMagnifierGlass.Location = new System.Drawing.Point(37, 75);
+            this.pictureBoxMagnifierGlass.Name = "pictureBoxMagnifierGlass";
+            this.pictureBoxMagnifierGlass.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxMagnifierGlass.TabIndex = 6;
+            this.pictureBoxMagnifierGlass.TabStop = false;
             // 
             // labelActualY
             // 
@@ -142,15 +169,13 @@
             this.timerPositionXY.Interval = 10;
             this.timerPositionXY.Tick += new System.EventHandler(this.timerPositionXY_Tick);
             // 
-            // pictureBoxMagnifierGlass
+            // panelActualColor
             // 
-            this.pictureBoxMagnifierGlass.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxMagnifierGlass.Location = new System.Drawing.Point(100, 24);
-            this.pictureBoxMagnifierGlass.Name = "pictureBoxMagnifierGlass";
-            this.pictureBoxMagnifierGlass.Size = new System.Drawing.Size(170, 170);
-            this.pictureBoxMagnifierGlass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxMagnifierGlass.TabIndex = 6;
-            this.pictureBoxMagnifierGlass.TabStop = false;
+            this.panelActualColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelActualColor.Location = new System.Drawing.Point(37, 177);
+            this.panelActualColor.Name = "panelActualColor";
+            this.panelActualColor.Size = new System.Drawing.Size(100, 20);
+            this.panelActualColor.TabIndex = 8;
             // 
             // MainWindow
             // 
@@ -170,8 +195,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).EndInit();
             this.panelBackground.ResumeLayout(false);
             this.panelBackground.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMagnifierGlass)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrow)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -187,6 +213,8 @@
         private System.Windows.Forms.Timer timerPositionXY;
         private System.Windows.Forms.Label labelActualY;
         private System.Windows.Forms.PictureBox pictureBoxMagnifierGlass;
+        private System.Windows.Forms.PictureBox pictureBoxZoomCross;
+        private System.Windows.Forms.Panel panelActualColor;
     }
 }
 

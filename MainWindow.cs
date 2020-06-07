@@ -1,18 +1,24 @@
-﻿using System;
+﻿using DesktopColorPicker.common;
+using System;
 using System.Drawing;
-using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace DesktopColorPicker
 {
     public partial class MainWindow : Form
     {
-        bool moveWindow;
-        int moveWindowX;
-        int moveWindowY;
-        Bitmap bitmapMagnifierGlass;
-        Graphics graphicsMagnifierGlass;
-        int zoomMagnifierGlass = 10;
+        private bool moveWindow;
+        private int moveWindowX;
+        private int moveWindowY;
+        private Bitmap bitmapMagnifierGlass;
+        private Graphics graphicsMagnifierGlass;
+        private int sizeMagnifierGlass = 11;
+
+        Config config = new Config();
+        GetColorFromXY getColor = new GetColorFromXY();
 
         public MainWindow()
         {
@@ -22,13 +28,17 @@ namespace DesktopColorPicker
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(Int32.Parse(config.Get("StartPositionX")), Int32.Parse(config.Get("StartPositionY")));
             pictureBoxTopLeftCorner.Parent = panelBackground;
+            pictureBoxZoomCross.Parent = pictureBoxMagnifierGlass;
             timerPositionXY.Start();
             timerPositionXY.Interval = 1;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
+            config.Set("StartPositionX", this.Location.X.ToString());
+            config.Set("StartPositionY", this.Location.Y.ToString());
             this.Close();
         }
 
@@ -56,10 +66,32 @@ namespace DesktopColorPicker
         {
             labelActualX.Text = Cursor.Position.X.ToString();
             labelActualY.Text = Cursor.Position.Y.ToString();
-            bitmapMagnifierGlass = new Bitmap(pictureBoxMagnifierGlass.Width / zoomMagnifierGlass, pictureBoxMagnifierGlass.Height / zoomMagnifierGlass, PixelFormat.Format24bppRgb);
+            bitmapMagnifierGlass = new Bitmap(sizeMagnifierGlass, sizeMagnifierGlass);
             graphicsMagnifierGlass = Graphics.FromImage(bitmapMagnifierGlass);
-            graphicsMagnifierGlass.CopyFromScreen(MousePosition.X - pictureBoxMagnifierGlass.Width / (zoomMagnifierGlass * 2), MousePosition.Y - pictureBoxMagnifierGlass.Height / (zoomMagnifierGlass * 2), 0, 0, pictureBoxMagnifierGlass.Size, CopyPixelOperation.SourceCopy);
-            pictureBoxMagnifierGlass.Image = bitmapMagnifierGlass;
+            graphicsMagnifierGlass.CopyFromScreen(MousePosition.X - (sizeMagnifierGlass / 2), MousePosition.Y - (sizeMagnifierGlass / 2), 0, 0, new Size(sizeMagnifierGlass, sizeMagnifierGlass));
+            Bitmap zoomed = (Bitmap)pictureBoxMagnifierGlass.Image;
+            if (zoomed != null) zoomed.Dispose();
+            zoomed = new Bitmap(pictureBoxMagnifierGlass.Width + sizeMagnifierGlass, pictureBoxMagnifierGlass.Height + sizeMagnifierGlass);
+            using (Graphics g = Graphics.FromImage(zoomed))
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.DrawImage(bitmapMagnifierGlass, new Rectangle(Point.Empty, zoomed.Size));
+            }
+            pictureBoxMagnifierGlass.Image = zoomed;
+            panelActualColor.BackColor = getColor.GetColorAt(MousePosition.X, MousePosition.Y);
+
+        }
+
+        private void pictureBoxZoomCross_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics cross = pictureBoxMagnifierGlass.CreateGraphics();
+            Brush red = new SolidBrush(Color.Red);
+            Pen redPen = new Pen(red, 1);
+
+            cross.DrawLine(redPen, pictureBoxMagnifierGlass.Width / 2, 0, pictureBoxMagnifierGlass.Height / 2, (pictureBoxMagnifierGlass.Height - sizeMagnifierGlass + 1) / 2);
+            cross.DrawLine(redPen, pictureBoxMagnifierGlass.Width / 2, (pictureBoxMagnifierGlass.Height + sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2, pictureBoxMagnifierGlass.Height);
+            cross.DrawLine(redPen, 0, pictureBoxMagnifierGlass.Height/2, (pictureBoxMagnifierGlass.Width - sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2);
+            cross.DrawLine(redPen, (pictureBoxMagnifierGlass.Width + sizeMagnifierGlass + 1) / 2, pictureBoxMagnifierGlass.Height / 2, pictureBoxMagnifierGlass.Width, pictureBoxMagnifierGlass.Height / 2);
         }
     }
 }
