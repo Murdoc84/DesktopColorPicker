@@ -30,11 +30,31 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelTopBar = new System.Windows.Forms.Panel();
             this.checkBoxAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.pictureBoxTopLeftCorner = new System.Windows.Forms.PictureBox();
             this.panelBackground = new System.Windows.Forms.Panel();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.pictureBoxPicketColor = new System.Windows.Forms.PictureBox();
+            this.textBoxPickedB = new System.Windows.Forms.TextBox();
+            this.textBoxPickedG = new System.Windows.Forms.TextBox();
+            this.textBoxPickedR = new System.Windows.Forms.TextBox();
+            this.textBoxPickedA = new System.Windows.Forms.TextBox();
+            this.textBoxPickedY = new System.Windows.Forms.TextBox();
+            this.textBoxPickedX = new System.Windows.Forms.TextBox();
+            this.labelBG = new System.Windows.Forms.Label();
+            this.labelGG = new System.Windows.Forms.Label();
+            this.labelRG = new System.Windows.Forms.Label();
+            this.labelAG = new System.Windows.Forms.Label();
+            this.labelYG = new System.Windows.Forms.Label();
+            this.labelXG = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonPickColorFromXY = new System.Windows.Forms.Button();
             this.labelSetY = new System.Windows.Forms.Label();
             this.labelSetX = new System.Windows.Forms.Label();
@@ -58,33 +78,20 @@
             this.pictureBoxMagnifierGlass = new System.Windows.Forms.PictureBox();
             this.labelActualX = new System.Windows.Forms.Label();
             this.timerPositionXY = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelBG = new System.Windows.Forms.Label();
-            this.labelGG = new System.Windows.Forms.Label();
-            this.labelRG = new System.Windows.Forms.Label();
-            this.labelAG = new System.Windows.Forms.Label();
-            this.labelYG = new System.Windows.Forms.Label();
-            this.labelXG = new System.Windows.Forms.Label();
             this.panelShowHide = new System.Windows.Forms.Panel();
             this.labelShowHide = new System.Windows.Forms.Label();
             this.panelSaved = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBoxPickedX = new System.Windows.Forms.TextBox();
-            this.textBoxPickedY = new System.Windows.Forms.TextBox();
-            this.textBoxPickedA = new System.Windows.Forms.TextBox();
-            this.textBoxPickedB = new System.Windows.Forms.TextBox();
-            this.textBoxPickedG = new System.Windows.Forms.TextBox();
-            this.textBoxPickedR = new System.Windows.Forms.TextBox();
-            this.pictureBoxPicketColor = new System.Windows.Forms.PictureBox();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.dataGridViewSavedData = new System.Windows.Forms.DataGridView();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.panelTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).BeginInit();
             this.panelBackground.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicketColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMagnifierGlass)).BeginInit();
             this.panelShowHide.SuspendLayout();
             this.panelSaved.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicketColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSavedData)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonClose
@@ -194,6 +201,146 @@
             this.panelBackground.Name = "panelBackground";
             this.panelBackground.Size = new System.Drawing.Size(400, 195);
             this.panelBackground.TabIndex = 3;
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Enabled = false;
+            this.buttonSave.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSave.Location = new System.Drawing.Point(197, 166);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(191, 23);
+            this.buttonSave.TabIndex = 41;
+            this.buttonSave.Text = "Save data as ...";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // pictureBoxPicketColor
+            // 
+            this.pictureBoxPicketColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxPicketColor.Location = new System.Drawing.Point(335, 106);
+            this.pictureBoxPicketColor.Name = "pictureBoxPicketColor";
+            this.pictureBoxPicketColor.Size = new System.Drawing.Size(56, 55);
+            this.pictureBoxPicketColor.TabIndex = 40;
+            this.pictureBoxPicketColor.TabStop = false;
+            this.pictureBoxPicketColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPicketColor_MouseClick);
+            // 
+            // textBoxPickedB
+            // 
+            this.textBoxPickedB.Location = new System.Drawing.Point(285, 144);
+            this.textBoxPickedB.Name = "textBoxPickedB";
+            this.textBoxPickedB.ReadOnly = true;
+            this.textBoxPickedB.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedB.TabIndex = 39;
+            // 
+            // textBoxPickedG
+            // 
+            this.textBoxPickedG.Location = new System.Drawing.Point(285, 124);
+            this.textBoxPickedG.Name = "textBoxPickedG";
+            this.textBoxPickedG.ReadOnly = true;
+            this.textBoxPickedG.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedG.TabIndex = 38;
+            // 
+            // textBoxPickedR
+            // 
+            this.textBoxPickedR.Location = new System.Drawing.Point(285, 104);
+            this.textBoxPickedR.Name = "textBoxPickedR";
+            this.textBoxPickedR.ReadOnly = true;
+            this.textBoxPickedR.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedR.TabIndex = 37;
+            // 
+            // textBoxPickedA
+            // 
+            this.textBoxPickedA.Location = new System.Drawing.Point(211, 144);
+            this.textBoxPickedA.Name = "textBoxPickedA";
+            this.textBoxPickedA.ReadOnly = true;
+            this.textBoxPickedA.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedA.TabIndex = 36;
+            // 
+            // textBoxPickedY
+            // 
+            this.textBoxPickedY.Location = new System.Drawing.Point(211, 124);
+            this.textBoxPickedY.Name = "textBoxPickedY";
+            this.textBoxPickedY.ReadOnly = true;
+            this.textBoxPickedY.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedY.TabIndex = 35;
+            // 
+            // textBoxPickedX
+            // 
+            this.textBoxPickedX.Location = new System.Drawing.Point(211, 104);
+            this.textBoxPickedX.Name = "textBoxPickedX";
+            this.textBoxPickedX.ReadOnly = true;
+            this.textBoxPickedX.Size = new System.Drawing.Size(46, 20);
+            this.textBoxPickedX.TabIndex = 34;
+            // 
+            // labelBG
+            // 
+            this.labelBG.AutoSize = true;
+            this.labelBG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelBG.Location = new System.Drawing.Point(263, 147);
+            this.labelBG.Name = "labelBG";
+            this.labelBG.Size = new System.Drawing.Size(21, 15);
+            this.labelBG.TabIndex = 33;
+            this.labelBG.Text = "B: ";
+            // 
+            // labelGG
+            // 
+            this.labelGG.AutoSize = true;
+            this.labelGG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelGG.Location = new System.Drawing.Point(263, 127);
+            this.labelGG.Name = "labelGG";
+            this.labelGG.Size = new System.Drawing.Size(21, 15);
+            this.labelGG.TabIndex = 32;
+            this.labelGG.Text = "G: ";
+            // 
+            // labelRG
+            // 
+            this.labelRG.AutoSize = true;
+            this.labelRG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelRG.Location = new System.Drawing.Point(263, 107);
+            this.labelRG.Name = "labelRG";
+            this.labelRG.Size = new System.Drawing.Size(21, 15);
+            this.labelRG.TabIndex = 31;
+            this.labelRG.Text = "R: ";
+            // 
+            // labelAG
+            // 
+            this.labelAG.AutoSize = true;
+            this.labelAG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelAG.Location = new System.Drawing.Point(191, 147);
+            this.labelAG.Name = "labelAG";
+            this.labelAG.Size = new System.Drawing.Size(21, 15);
+            this.labelAG.TabIndex = 30;
+            this.labelAG.Text = "A: ";
+            // 
+            // labelYG
+            // 
+            this.labelYG.AutoSize = true;
+            this.labelYG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelYG.Location = new System.Drawing.Point(191, 127);
+            this.labelYG.Name = "labelYG";
+            this.labelYG.Size = new System.Drawing.Size(19, 15);
+            this.labelYG.TabIndex = 29;
+            this.labelYG.Text = "Y: ";
+            // 
+            // labelXG
+            // 
+            this.labelXG.AutoSize = true;
+            this.labelXG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelXG.Location = new System.Drawing.Point(191, 107);
+            this.labelXG.Name = "labelXG";
+            this.labelXG.Size = new System.Drawing.Size(21, 15);
+            this.labelXG.TabIndex = 28;
+            this.labelXG.Text = "X: ";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(218, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(150, 30);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Alt+G for pick cursor location\r\nCtrl+Alt+G for pick and save";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonPickColorFromXY
             // 
@@ -438,76 +585,6 @@
             // 
             this.timerPositionXY.Tick += new System.EventHandler(this.timerPositionXY_Tick);
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(218, 71);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 30);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Ctrl+G for pick cursor location\r\nShift+Ctrl+G for pick and save";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelBG
-            // 
-            this.labelBG.AutoSize = true;
-            this.labelBG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelBG.Location = new System.Drawing.Point(263, 147);
-            this.labelBG.Name = "labelBG";
-            this.labelBG.Size = new System.Drawing.Size(21, 15);
-            this.labelBG.TabIndex = 33;
-            this.labelBG.Text = "B: ";
-            // 
-            // labelGG
-            // 
-            this.labelGG.AutoSize = true;
-            this.labelGG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelGG.Location = new System.Drawing.Point(263, 127);
-            this.labelGG.Name = "labelGG";
-            this.labelGG.Size = new System.Drawing.Size(21, 15);
-            this.labelGG.TabIndex = 32;
-            this.labelGG.Text = "G: ";
-            // 
-            // labelRG
-            // 
-            this.labelRG.AutoSize = true;
-            this.labelRG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelRG.Location = new System.Drawing.Point(263, 107);
-            this.labelRG.Name = "labelRG";
-            this.labelRG.Size = new System.Drawing.Size(21, 15);
-            this.labelRG.TabIndex = 31;
-            this.labelRG.Text = "R: ";
-            // 
-            // labelAG
-            // 
-            this.labelAG.AutoSize = true;
-            this.labelAG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelAG.Location = new System.Drawing.Point(191, 147);
-            this.labelAG.Name = "labelAG";
-            this.labelAG.Size = new System.Drawing.Size(21, 15);
-            this.labelAG.TabIndex = 30;
-            this.labelAG.Text = "A: ";
-            // 
-            // labelYG
-            // 
-            this.labelYG.AutoSize = true;
-            this.labelYG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelYG.Location = new System.Drawing.Point(191, 127);
-            this.labelYG.Name = "labelYG";
-            this.labelYG.Size = new System.Drawing.Size(19, 15);
-            this.labelYG.TabIndex = 29;
-            this.labelYG.Text = "Y: ";
-            // 
-            // labelXG
-            // 
-            this.labelXG.AutoSize = true;
-            this.labelXG.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelXG.Location = new System.Drawing.Point(191, 107);
-            this.labelXG.Name = "labelXG";
-            this.labelXG.Size = new System.Drawing.Size(21, 15);
-            this.labelXG.TabIndex = 28;
-            this.labelXG.Text = "X: ";
-            // 
             // panelShowHide
             // 
             this.panelShowHide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(90)))), ((int)(((byte)(115)))));
@@ -533,124 +610,70 @@
             // panelSaved
             // 
             this.panelSaved.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelSaved.Controls.Add(this.listBox1);
+            this.panelSaved.Controls.Add(this.buttonDelete);
+            this.panelSaved.Controls.Add(this.dataGridViewSavedData);
             this.panelSaved.Location = new System.Drawing.Point(0, 210);
             this.panelSaved.Name = "panelSaved";
             this.panelSaved.Size = new System.Drawing.Size(400, 364);
             this.panelSaved.TabIndex = 5;
             this.panelSaved.Visible = false;
             // 
-            // listBox1
+            // dataGridViewSavedData
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "3c",
-            "2",
-            "3",
-            "1",
-            "23",
-            "12",
-            "4",
-            "",
-            "44",
-            "123",
-            "4",
-            "123",
-            "4",
-            "123",
-            "41",
-            "234",
-            "12",
-            "34",
-            "123",
-            "4",
-            "1234",
-            "123",
-            "412",
-            "34",
-            "12",
-            "34",
-            "12",
-            "34",
-            "12",
-            "34",
-            "21",
-            "34",
-            "",
-            "234"});
-            this.listBox1.Location = new System.Drawing.Point(9, 41);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(379, 316);
-            this.listBox1.TabIndex = 0;
+            this.dataGridViewSavedData.AllowUserToAddRows = false;
+            this.dataGridViewSavedData.AllowUserToDeleteRows = false;
+            this.dataGridViewSavedData.AllowUserToResizeColumns = false;
+            this.dataGridViewSavedData.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewSavedData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewSavedData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewSavedData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(90)))), ((int)(((byte)(115)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSavedData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewSavedData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSavedData.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewSavedData.Location = new System.Drawing.Point(0, 34);
+            this.dataGridViewSavedData.MultiSelect = false;
+            this.dataGridViewSavedData.Name = "dataGridViewSavedData";
+            this.dataGridViewSavedData.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSavedData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewSavedData.RowHeadersWidth = 24;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewSavedData.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewSavedData.Size = new System.Drawing.Size(400, 330);
+            this.dataGridViewSavedData.TabIndex = 0;
+            this.dataGridViewSavedData.SelectionChanged += new System.EventHandler(this.dataGridViewSavedData_SelectionChanged);
             // 
-            // textBoxPickedX
+            // buttonDelete
             // 
-            this.textBoxPickedX.Location = new System.Drawing.Point(211, 104);
-            this.textBoxPickedX.Name = "textBoxPickedX";
-            this.textBoxPickedX.ReadOnly = true;
-            this.textBoxPickedX.Size = new System.Drawing.Size(46, 20);
-            this.textBoxPickedX.TabIndex = 34;
-            // 
-            // textBoxPickedY
-            // 
-            this.textBoxPickedY.Location = new System.Drawing.Point(211, 124);
-            this.textBoxPickedY.Name = "textBoxPickedY";
-            this.textBoxPickedY.ReadOnly = true;
-            this.textBoxPickedY.Size = new System.Drawing.Size(46, 20);
-            this.textBoxPickedY.TabIndex = 35;
-            // 
-            // textBoxPickedA
-            // 
-            this.textBoxPickedA.Location = new System.Drawing.Point(211, 144);
-            this.textBoxPickedA.Name = "textBoxPickedA";
-            this.textBoxPickedA.ReadOnly = true;
-            this.textBoxPickedA.Size = new System.Drawing.Size(46, 20);
-            this.textBoxPickedA.TabIndex = 36;
-            // 
-            // textBoxPickedB
-            // 
-            this.textBoxPickedB.Location = new System.Drawing.Point(285, 144);
-            this.textBoxPickedB.Name = "textBoxPickedB";
-            this.textBoxPickedB.ReadOnly = true;
-            this.textBoxPickedB.Size = new System.Drawing.Size(46, 20);
-            this.textBoxPickedB.TabIndex = 39;
-            // 
-            // textBoxPickedG
-            // 
-            this.textBoxPickedG.Location = new System.Drawing.Point(285, 124);
-            this.textBoxPickedG.Name = "textBoxPickedG";
-            this.textBoxPickedG.ReadOnly = true;
-            this.textBoxPickedG.Size = new System.Drawing.Size(46, 20);
-            this.textBoxPickedG.TabIndex = 38;
-            // 
-            // textBoxPickedR
-            // 
-            this.textBoxPickedR.Location = new System.Drawing.Point(285, 104);
-            this.textBoxPickedR.Name = "textBoxPickedR";
-            this.textBoxPickedR.ReadOnly = true;
-            this.textBoxPickedR.Size = new System.Drawing.Size(46, 20);
-            this.textBoxPickedR.TabIndex = 37;
-            // 
-            // pictureBoxPicketColor
-            // 
-            this.pictureBoxPicketColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPicketColor.Location = new System.Drawing.Point(335, 106);
-            this.pictureBoxPicketColor.Name = "pictureBoxPicketColor";
-            this.pictureBoxPicketColor.Size = new System.Drawing.Size(56, 55);
-            this.pictureBoxPicketColor.TabIndex = 40;
-            this.pictureBoxPicketColor.TabStop = false;
-            this.pictureBoxPicketColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPicketColor_MouseClick);
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonSave.Location = new System.Drawing.Point(197, 166);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(191, 23);
-            this.buttonSave.TabIndex = 41;
-            this.buttonSave.Text = "Save data as ...";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonDelete.Enabled = false;
+            this.buttonDelete.Location = new System.Drawing.Point(365, 6);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(32, 23);
+            this.buttonDelete.TabIndex = 1;
+            this.buttonDelete.Text = "D";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // MainWindow
             // 
@@ -674,11 +697,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).EndInit();
             this.panelBackground.ResumeLayout(false);
             this.panelBackground.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicketColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZoomCross)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMagnifierGlass)).EndInit();
             this.panelShowHide.ResumeLayout(false);
             this.panelSaved.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicketColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSavedData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -723,7 +747,6 @@
         private System.Windows.Forms.Panel panelShowHide;
         private System.Windows.Forms.Label labelShowHide;
         private System.Windows.Forms.Panel panelSaved;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox textBoxPickedB;
         private System.Windows.Forms.TextBox textBoxPickedG;
         private System.Windows.Forms.TextBox textBoxPickedR;
@@ -732,6 +755,8 @@
         private System.Windows.Forms.TextBox textBoxPickedX;
         private System.Windows.Forms.PictureBox pictureBoxPicketColor;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.DataGridView dataGridViewSavedData;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
 

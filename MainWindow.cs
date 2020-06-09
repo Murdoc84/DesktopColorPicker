@@ -1,9 +1,10 @@
 ﻿using DesktopColorPicker.common;
+using NHotkey;
+using NHotkey.WindowsForms;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 namespace DesktopColorPicker
 {
@@ -20,13 +21,18 @@ namespace DesktopColorPicker
         private int pickedY;
 
         private Config config = new Config();
+        private Files files = new Files();
         private GetColorFromXY getColor = new GetColorFromXY();
 
         public MainWindow()
         {
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            HotkeyManager.Current.AddOrReplace("Pick", Keys.Alt | Keys.G, PickColor);
+            HotkeyManager.Current.AddOrReplace("PickAndSaveAs", Keys.Control | Keys.Alt | Keys.G, PickColorAndSaveAs);
             InitializeComponent();
         }
+
+        #region Actions
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
@@ -37,6 +43,48 @@ namespace DesktopColorPicker
             pictureBoxZoomCross.Parent = pictureBoxMagnifierGlass;
             timerPositionXY.Start();
             timerPositionXY.Interval = 1;
+        }
+
+        private DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -137,8 +185,7 @@ namespace DesktopColorPicker
         {
             pickedX = Int32.Parse(textBoxSetX.Text);
             pickedY = Int32.Parse(textBoxSetY.Text);
-            pickedColor = getColor.GetColorAt(pickedX, pickedY);
-            SetPickedValues();
+            SetPickedValues(pickedX, pickedY);
         }
 
         private void panelShowHide_MouseClick(object sender, MouseEventArgs e)
@@ -150,12 +197,46 @@ namespace DesktopColorPicker
         {
             ShowSavedPanel();
         }
+
+        private void pictureBoxPicketColor_MouseClick(object sender, MouseEventArgs e)
+        {
+            string textColor = $"Color.FromArgb({pickedColor.A}, {pickedColor.R}, {pickedColor.G}, {pickedColor.B})";
+            Clipboard.SetText(textColor);
+            MessageBox.Show($"Clipboard: {textColor}");
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            SaveAs();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            files.DeleteRow(dataGridViewSavedData.CurrentRow.Index);
+            ReadCsv();
+        }
+
+        private void dataGridViewSavedData_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewSavedData.CurrentRow.Selected)
+            {
+                buttonDelete.Enabled = true;
+            }
+            else
+            {
+                buttonDelete.Enabled = false;
+            }
+        }
+
+        #endregion Actions
+
         private void ShowSavedPanel()
         {
             if (labelShowHide.Text.Equals("SHOW"))
             {
                 labelShowHide.Text = "HIDE";
                 panelSaved.Visible = true;
+                ReadCsv();
             }
             else
             {
@@ -163,8 +244,12 @@ namespace DesktopColorPicker
                 panelSaved.Visible = false;
             }
         }
-        private void SetPickedValues()
+
+        private void SetPickedValues(int x, int y)
         {
+            pickedX = x;
+            pickedY = y;
+            pickedColor = getColor.GetColorAt(x, y);
             textBoxPickedX.Text = pickedX.ToString();
             textBoxPickedY.Text = pickedY.ToString();
             textBoxPickedA.Text = pickedColor.A.ToString();
@@ -172,18 +257,51 @@ namespace DesktopColorPicker
             textBoxPickedG.Text = pickedColor.G.ToString();
             textBoxPickedB.Text = pickedColor.B.ToString();
             pictureBoxPicketColor.BackColor = pickedColor;
+            buttonSave.Enabled = true;
         }
 
-        private void pictureBoxPicketColor_MouseClick(object sender, MouseEventArgs e)
+        private void SaveAs()
         {
-            string textColor = $"Color.FromArgb({pickedColor.A.ToString()}, {pickedColor.R.ToString()}, {pickedColor.G.ToString()}, {pickedColor.B.ToString()})";
-            Clipboard.SetText(textColor);
-            MessageBox.Show($"Clipboard: {textColor}");
+            this.Activate();
+            string saveAs = "";
+            bool dialogOK = (InputBox("Save As ...", "Save picked data as:", ref saveAs) == DialogResult.OK) ? true : false;
+            if (!string.IsNullOrEmpty(saveAs) && dialogOK)
+            {
+                files.PrepareAndAppendToCsv(saveAs, pickedX, pickedY, pickedColor);
+                if (panelSaved.Visible)
+                {
+                    ReadCsv();
+                }
+            }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ReadCsv()
         {
-            string saveAs = Interaction.InputBox("Save picked color as ...", "Save As ...", "");
+            dataGridViewSavedData.DataSource = files.ReadCsv();
+            foreach (DataGridViewColumn column in dataGridViewSavedData.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                if (column.Width > 78)
+                {
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    column.Width = 78;
+                }
+                if (column.HeaderText == "Name")
+                {
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
+        }
+
+        private void PickColorAndSaveAs(object sender, HotkeyEventArgs e)
+        {
+            SetPickedValues(MousePosition.X, MousePosition.Y);
+            SaveAs();
+        }
+
+        private void PickColor(object sender, HotkeyEventArgs e)
+        {
+            SetPickedValues(MousePosition.X, MousePosition.Y);
         }
     }
 }
