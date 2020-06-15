@@ -707,7 +707,7 @@
             this.comboBoxTemplates.Name = "comboBoxTemplates";
             this.comboBoxTemplates.Size = new System.Drawing.Size(207, 21);
             this.comboBoxTemplates.TabIndex = 2;
-            this.comboBoxTemplates.SelectionChangeCommitted += new System.EventHandler(this.comboBoxTemplates_SelectionChangeCommitted);
+            this.comboBoxTemplates.SelectedIndexChanged += new System.EventHandler(this.comboBoxTemplates_SelectedIndexChanged);
             this.comboBoxTemplates.Click += new System.EventHandler(this.comboBoxTemplates_Click);
             // 
             // buttonDelete

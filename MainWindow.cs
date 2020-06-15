@@ -254,6 +254,11 @@ namespace DesktopColorPicker
             }
         }
 
+        private void comboBoxTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            config.Set("StartTemplate", comboBoxTemplates.Text);
+        }
+
         private void buttonCopyToClipboard_Click(object sender, EventArgs e)
         {
             Clipboard.Clear();
@@ -263,11 +268,6 @@ namespace DesktopColorPicker
         private void comboBoxTemplates_Click(object sender, EventArgs e)
         {
             RefreshComboBoxTemplate();
-        }
-
-        private void comboBoxTemplates_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            config.Set("StartTemplate", comboBoxTemplates.Text);
         }
 
         private void buttonRead_Click(object sender, EventArgs e)
