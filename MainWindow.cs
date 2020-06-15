@@ -2,8 +2,10 @@
 using NHotkey;
 using NHotkey.WindowsForms;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DesktopColorPicker
@@ -22,6 +24,7 @@ namespace DesktopColorPicker
 
         private Config config = new Config();
         private Files files = new Files();
+        private Templates templates = new Templates();
         private GetColorFromXY getColor = new GetColorFromXY();
 
         public MainWindow()
@@ -43,6 +46,8 @@ namespace DesktopColorPicker
             pictureBoxZoomCross.Parent = pictureBoxMagnifierGlass;
             timerPositionXY.Start();
             timerPositionXY.Interval = 1;
+            RefreshComboBoxTemplate();
+            comboBoxTemplates.SelectedItem = config.Get("StartTemplate");
         }
 
         private DialogResult InputBox(string title, string promptText, ref string value)
@@ -140,6 +145,17 @@ namespace DesktopColorPicker
             labelActualG.Text = actualColor.G.ToString();
             labelActualB.Text = actualColor.B.ToString();
             labelActualRGB.Text = "#" + actualColor.R.ToString("X2") + actualColor.G.ToString("X2") + actualColor.B.ToString("X2");
+            if (checkBoxLive.Checked && pickedX != null)
+            {
+                pickedColor = getColor.GetColorAt(pickedX, pickedY);
+                textBoxPickedX.Text = pickedX.ToString();
+                textBoxPickedY.Text = pickedY.ToString();
+                textBoxPickedA.Text = pickedColor.A.ToString();
+                textBoxPickedR.Text = pickedColor.R.ToString();
+                textBoxPickedG.Text = pickedColor.G.ToString();
+                textBoxPickedB.Text = pickedColor.B.ToString();
+                pictureBoxPicketColor.BackColor = pickedColor;
+            }
         }
 
         private void pictureBoxZoomCross_Paint(object sender, PaintEventArgs e)
@@ -221,11 +237,70 @@ namespace DesktopColorPicker
             if (dataGridViewSavedData.CurrentRow.Selected)
             {
                 buttonDelete.Enabled = true;
+                buttonCopyToClipboard.Enabled = true;
+                buttonRead.Enabled = true;
+                buttonUpdate.Enabled = true;
+                buttonMoveUp.Enabled = true;
+                buttonMoveDown.Enabled = true;
             }
             else
             {
                 buttonDelete.Enabled = false;
+                buttonCopyToClipboard.Enabled = false;
+                buttonRead.Enabled = false;
+                buttonUpdate.Enabled = false;
+                buttonMoveUp.Enabled = false;
+                buttonMoveDown.Enabled = false;
             }
+        }
+
+        private void buttonCopyToClipboard_Click(object sender, EventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(templates.BuildFromTemplate(files.ReadLine(dataGridViewSavedData.CurrentRow.Index), comboBoxTemplates.Text));
+        }
+
+        private void comboBoxTemplates_Click(object sender, EventArgs e)
+        {
+            RefreshComboBoxTemplate();
+        }
+
+        private void comboBoxTemplates_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            config.Set("StartTemplate", comboBoxTemplates.Text);
+        }
+
+        private void buttonRead_Click(object sender, EventArgs e)
+        {
+            List<string> list = files.ReadLine(dataGridViewSavedData.CurrentRow.Index);
+            pickedX = Int32.Parse(list[1]);
+            pickedY = Int32.Parse(list[2]);
+            pickedColor = Color.FromArgb(Int32.Parse(list[3]), Int32.Parse(list[4]), Int32.Parse(list[5]), Int32.Parse(list[6]));
+            SetPickedValues(pickedX, pickedY, false);
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            int row = dataGridViewSavedData.CurrentRow.Index;
+            SaveAs(false, row);
+            ReadCsv();
+            SelectRow(row);
+        }
+
+        private void buttonMoveUp_Click(object sender, EventArgs e)
+        {
+            int row = dataGridViewSavedData.CurrentRow.Index;
+            files.MoveRowUp(row);
+            ReadCsv();
+            SelectRow(row - 1);
+        }
+
+        private void buttonMoveDown_Click(object sender, EventArgs e)
+        {
+            int row = dataGridViewSavedData.CurrentRow.Index;
+            files.MoveRowDown(row);
+            ReadCsv();
+            SelectRow(row + 1);
         }
 
         #endregion Actions
@@ -245,11 +320,16 @@ namespace DesktopColorPicker
             }
         }
 
-        private void SetPickedValues(int x, int y)
+        private void SetPickedValues(int x, int y, bool pickColor = true)
         {
             pickedX = x;
             pickedY = y;
-            pickedColor = getColor.GetColorAt(x, y);
+            textBoxSetX.Text = x.ToString();
+            textBoxSetY.Text = y.ToString();
+            if (pickColor)
+            {
+                pickedColor = getColor.GetColorAt(x, y);
+            }
             textBoxPickedX.Text = pickedX.ToString();
             textBoxPickedY.Text = pickedY.ToString();
             textBoxPickedA.Text = pickedColor.A.ToString();
@@ -260,14 +340,21 @@ namespace DesktopColorPicker
             buttonSave.Enabled = true;
         }
 
-        private void SaveAs()
+        private void SaveAs(bool newItem = true, int row = 0)
         {
             this.Activate();
             string saveAs = "";
             bool dialogOK = (InputBox("Save As ...", "Save picked data as:", ref saveAs) == DialogResult.OK) ? true : false;
             if (!string.IsNullOrEmpty(saveAs) && dialogOK)
             {
-                files.PrepareAndAppendToCsv(saveAs, pickedX, pickedY, pickedColor);
+                if (!newItem)
+                {
+                    files.UpdateRow(row, files.PrepareStream(saveAs, pickedX, pickedY, pickedColor));
+                }
+                else
+                {
+                    files.PrepareAndAppendToCsv(files.PrepareStream(saveAs, pickedX, pickedY, pickedColor));
+                }
                 if (panelSaved.Visible)
                 {
                     ReadCsv();
@@ -302,6 +389,23 @@ namespace DesktopColorPicker
         private void PickColor(object sender, HotkeyEventArgs e)
         {
             SetPickedValues(MousePosition.X, MousePosition.Y);
+        }
+
+        private void RefreshComboBoxTemplate()
+        {
+            comboBoxTemplates.Items.Clear();
+            string[] files = Directory.GetFiles("templates");
+            foreach (var file in files)
+            {
+                comboBoxTemplates.Items.Add(Path.GetFileNameWithoutExtension(file));
+            }
+        }
+
+        private void SelectRow(int row)
+        {
+            dataGridViewSavedData.ClearSelection();
+            dataGridViewSavedData.CurrentCell = dataGridViewSavedData.Rows[row].Cells[0];
+            dataGridViewSavedData.Rows[row].Selected = true;
         }
     }
 }

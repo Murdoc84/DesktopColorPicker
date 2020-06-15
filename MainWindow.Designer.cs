@@ -30,16 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelTopBar = new System.Windows.Forms.Panel();
             this.checkBoxAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.pictureBoxTopLeftCorner = new System.Windows.Forms.PictureBox();
             this.panelBackground = new System.Windows.Forms.Panel();
+            this.checkBoxLive = new System.Windows.Forms.CheckBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.pictureBoxPicketColor = new System.Windows.Forms.PictureBox();
             this.textBoxPickedB = new System.Windows.Forms.TextBox();
@@ -81,8 +82,14 @@
             this.panelShowHide = new System.Windows.Forms.Panel();
             this.labelShowHide = new System.Windows.Forms.Label();
             this.panelSaved = new System.Windows.Forms.Panel();
-            this.dataGridViewSavedData = new System.Windows.Forms.DataGridView();
+            this.buttonMoveUp = new System.Windows.Forms.Button();
+            this.buttonMoveDown = new System.Windows.Forms.Button();
+            this.buttonRead = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonCopyToClipboard = new System.Windows.Forms.Button();
+            this.comboBoxTemplates = new System.Windows.Forms.ComboBox();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.dataGridViewSavedData = new System.Windows.Forms.DataGridView();
             this.panelTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopLeftCorner)).BeginInit();
             this.panelBackground.SuspendLayout();
@@ -159,6 +166,7 @@
             // panelBackground
             // 
             this.panelBackground.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelBackground.Controls.Add(this.checkBoxLive);
             this.panelBackground.Controls.Add(this.buttonSave);
             this.panelBackground.Controls.Add(this.pictureBoxPicketColor);
             this.panelBackground.Controls.Add(this.textBoxPickedB);
@@ -201,6 +209,19 @@
             this.panelBackground.Name = "panelBackground";
             this.panelBackground.Size = new System.Drawing.Size(400, 195);
             this.panelBackground.TabIndex = 3;
+            // 
+            // checkBoxLive
+            // 
+            this.checkBoxLive.AutoSize = true;
+            this.checkBoxLive.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxLive.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBoxLive.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.checkBoxLive.Location = new System.Drawing.Point(352, 50);
+            this.checkBoxLive.Name = "checkBoxLive";
+            this.checkBoxLive.Size = new System.Drawing.Size(45, 19);
+            this.checkBoxLive.TabIndex = 1;
+            this.checkBoxLive.Text = "live";
+            this.checkBoxLive.UseVisualStyleBackColor = true;
             // 
             // buttonSave
             // 
@@ -347,7 +368,7 @@
             this.buttonPickColorFromXY.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPickColorFromXY.Location = new System.Drawing.Point(197, 47);
             this.buttonPickColorFromXY.Name = "buttonPickColorFromXY";
-            this.buttonPickColorFromXY.Size = new System.Drawing.Size(191, 23);
+            this.buttonPickColorFromXY.Size = new System.Drawing.Size(149, 23);
             this.buttonPickColorFromXY.TabIndex = 26;
             this.buttonPickColorFromXY.Text = "Pick color from X Y";
             this.buttonPickColorFromXY.UseVisualStyleBackColor = true;
@@ -610,13 +631,95 @@
             // panelSaved
             // 
             this.panelSaved.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelSaved.Controls.Add(this.buttonMoveUp);
+            this.panelSaved.Controls.Add(this.buttonMoveDown);
+            this.panelSaved.Controls.Add(this.buttonRead);
+            this.panelSaved.Controls.Add(this.buttonUpdate);
+            this.panelSaved.Controls.Add(this.buttonCopyToClipboard);
+            this.panelSaved.Controls.Add(this.comboBoxTemplates);
             this.panelSaved.Controls.Add(this.buttonDelete);
             this.panelSaved.Controls.Add(this.dataGridViewSavedData);
             this.panelSaved.Location = new System.Drawing.Point(0, 210);
             this.panelSaved.Name = "panelSaved";
-            this.panelSaved.Size = new System.Drawing.Size(400, 364);
+            this.panelSaved.Size = new System.Drawing.Size(400, 400);
             this.panelSaved.TabIndex = 5;
             this.panelSaved.Visible = false;
+            // 
+            // buttonMoveUp
+            // 
+            this.buttonMoveUp.Enabled = false;
+            this.buttonMoveUp.Location = new System.Drawing.Point(3, 374);
+            this.buttonMoveUp.Name = "buttonMoveUp";
+            this.buttonMoveUp.Size = new System.Drawing.Size(51, 23);
+            this.buttonMoveUp.TabIndex = 7;
+            this.buttonMoveUp.Text = "Up";
+            this.buttonMoveUp.UseVisualStyleBackColor = true;
+            this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
+            // 
+            // buttonMoveDown
+            // 
+            this.buttonMoveDown.Enabled = false;
+            this.buttonMoveDown.Location = new System.Drawing.Point(60, 374);
+            this.buttonMoveDown.Name = "buttonMoveDown";
+            this.buttonMoveDown.Size = new System.Drawing.Size(51, 23);
+            this.buttonMoveDown.TabIndex = 6;
+            this.buttonMoveDown.Text = "Down";
+            this.buttonMoveDown.UseVisualStyleBackColor = true;
+            this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
+            // 
+            // buttonRead
+            // 
+            this.buttonRead.Enabled = false;
+            this.buttonRead.Location = new System.Drawing.Point(232, 374);
+            this.buttonRead.Name = "buttonRead";
+            this.buttonRead.Size = new System.Drawing.Size(51, 23);
+            this.buttonRead.TabIndex = 5;
+            this.buttonRead.Text = "Read";
+            this.buttonRead.UseVisualStyleBackColor = true;
+            this.buttonRead.Click += new System.EventHandler(this.buttonRead_Click);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Enabled = false;
+            this.buttonUpdate.Location = new System.Drawing.Point(289, 374);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(51, 23);
+            this.buttonUpdate.TabIndex = 4;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // buttonCopyToClipboard
+            // 
+            this.buttonCopyToClipboard.Enabled = false;
+            this.buttonCopyToClipboard.Location = new System.Drawing.Point(217, 6);
+            this.buttonCopyToClipboard.Name = "buttonCopyToClipboard";
+            this.buttonCopyToClipboard.Size = new System.Drawing.Size(178, 23);
+            this.buttonCopyToClipboard.TabIndex = 3;
+            this.buttonCopyToClipboard.Text = "Copy to Clipboard using Template";
+            this.buttonCopyToClipboard.UseVisualStyleBackColor = true;
+            this.buttonCopyToClipboard.Click += new System.EventHandler(this.buttonCopyToClipboard_Click);
+            // 
+            // comboBoxTemplates
+            // 
+            this.comboBoxTemplates.FormattingEnabled = true;
+            this.comboBoxTemplates.Location = new System.Drawing.Point(3, 7);
+            this.comboBoxTemplates.Name = "comboBoxTemplates";
+            this.comboBoxTemplates.Size = new System.Drawing.Size(207, 21);
+            this.comboBoxTemplates.TabIndex = 2;
+            this.comboBoxTemplates.SelectionChangeCommitted += new System.EventHandler(this.comboBoxTemplates_SelectionChangeCommitted);
+            this.comboBoxTemplates.Click += new System.EventHandler(this.comboBoxTemplates_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Enabled = false;
+            this.buttonDelete.Location = new System.Drawing.Point(346, 374);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(51, 23);
+            this.buttonDelete.TabIndex = 1;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // dataGridViewSavedData
             // 
@@ -624,63 +727,52 @@
             this.dataGridViewSavedData.AllowUserToDeleteRows = false;
             this.dataGridViewSavedData.AllowUserToResizeColumns = false;
             this.dataGridViewSavedData.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewSavedData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewSavedData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewSavedData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewSavedData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(90)))), ((int)(((byte)(115)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSavedData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(90)))), ((int)(((byte)(115)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSavedData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewSavedData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSavedData.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSavedData.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewSavedData.Location = new System.Drawing.Point(0, 34);
             this.dataGridViewSavedData.MultiSelect = false;
             this.dataGridViewSavedData.Name = "dataGridViewSavedData";
             this.dataGridViewSavedData.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSavedData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSavedData.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewSavedData.RowHeadersWidth = 24;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewSavedData.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewSavedData.Size = new System.Drawing.Size(400, 330);
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewSavedData.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridViewSavedData.Size = new System.Drawing.Size(400, 334);
             this.dataGridViewSavedData.TabIndex = 0;
             this.dataGridViewSavedData.SelectionChanged += new System.EventHandler(this.dataGridViewSavedData_SelectionChanged);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(365, 6);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(32, 23);
-            this.buttonDelete.TabIndex = 1;
-            this.buttonDelete.Text = "D";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(400, 574);
+            this.ClientSize = new System.Drawing.Size(400, 610);
             this.Controls.Add(this.panelSaved);
             this.Controls.Add(this.panelShowHide);
             this.Controls.Add(this.buttonClose);
@@ -757,6 +849,13 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.DataGridView dataGridViewSavedData;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.CheckBox checkBoxLive;
+        private System.Windows.Forms.ComboBox comboBoxTemplates;
+        private System.Windows.Forms.Button buttonCopyToClipboard;
+        private System.Windows.Forms.Button buttonRead;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonMoveUp;
+        private System.Windows.Forms.Button buttonMoveDown;
     }
 }
 

@@ -60,6 +60,7 @@
     <Compile Include="common\Config.cs" />
     <Compile Include="common\Files.cs" />
     <Compile Include="common\GetColorFromXY.cs" />
+    <Compile Include="common\Templates.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

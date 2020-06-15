@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace DesktopColorPicker.common
 {
@@ -13,7 +14,7 @@ namespace DesktopColorPicker.common
         private string csv = dir + @"\saved.csv";
         private string cols = "Name,X,Y,A,R,G,B,hR,hG,hB,Hex";
 
-        public void PrepareAndAppendToCsv(string name, int x, int y, Color color)
+        public void PrepareAndAppendToCsv(List<string> stream)
         {
             if (!Directory.Exists(dir))
             {
@@ -32,6 +33,15 @@ namespace DesktopColorPicker.common
                 File.Delete(csv);
             }
 
+            using (StreamWriter sw = new StreamWriter(csv, false))
+            {
+                str = String.Join(",", stream) + Environment.NewLine + str;
+                sw.Write(str);
+            }
+        }
+
+        public List<string> PrepareStream(string name, int x, int y, Color color)
+        {
             List<string> stream = new List<string>();
             stream.Add(name);
             stream.Add(x.ToString());
@@ -44,18 +54,39 @@ namespace DesktopColorPicker.common
             stream.Add(color.G.ToString("X2"));
             stream.Add(color.B.ToString("X2"));
             stream.Add("#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2"));
-
-            using (StreamWriter sw = new StreamWriter(csv, false))
-            {
-                str = String.Join(",", stream) + Environment.NewLine + str;
-                sw.Write(str);
-            }
+            return stream;
         }
 
         public void DeleteRow(int row)
         {
             List<string> lines = File.ReadLines(csv).ToList();
             lines.RemoveAt(row);
+            File.WriteAllLines(csv, lines);
+        }
+
+        public void UpdateRow(int row, List<string> stream)
+        {
+            List<string> lines = File.ReadLines(csv).ToList();
+            lines.RemoveAt(row);
+            lines.Insert(row, String.Join(",", stream));
+            File.WriteAllLines(csv, lines);
+        }
+
+        public void MoveRowUp(int row)
+        {
+            List<string> lines = File.ReadLines(csv).ToList();
+            string line = lines[row];
+            lines.RemoveAt(row);
+            lines.Insert(row - 1, line);
+            File.WriteAllLines(csv, lines);
+        }
+
+        public void MoveRowDown(int row)
+        {
+            List<string> lines = File.ReadLines(csv).ToList();
+            string line = lines[row];
+            lines.RemoveAt(row);
+            lines.Insert(row + 1, line);
             File.WriteAllLines(csv, lines);
         }
 
@@ -85,6 +116,12 @@ namespace DesktopColorPicker.common
             {
                 return dt;
             }
+        }
+
+        public List<string> ReadLine(int row)
+        {
+            List<string> lines = File.ReadLines(csv).ToList();
+            return lines[row].Split(',').ToList<string>();
         }
     }
 }
