@@ -282,7 +282,7 @@ namespace DesktopColorPicker
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             int row = dataGridViewSavedData.CurrentRow.Index;
-            SaveAs(false, row);
+            SaveAs(false, row, dataGridViewSavedData.Rows[row].Cells[0].Value.ToString());
             ReadCsv();
             SelectRow(row);
         }
@@ -340,10 +340,10 @@ namespace DesktopColorPicker
             buttonSave.Enabled = true;
         }
 
-        private void SaveAs(bool newItem = true, int row = 0)
+        private void SaveAs(bool newItem = true, int row = 0, string saveAs = "")
         {
             this.Activate();
-            string saveAs = "";
+            //string saveAs = "";
             bool dialogOK = (InputBox("Save As ...", "Save picked data as:", ref saveAs) == DialogResult.OK) ? true : false;
             if (!string.IsNullOrEmpty(saveAs) && dialogOK)
             {
